@@ -100,8 +100,8 @@ export const siteConfig = {
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/danieldanuwar/portfolio.git
-cd portfolio
+git clone https://github.com/neovicon/danieldanuwar.com.np.git
+cd danieldanuwar.com.np
 
 # Install dependencies
 npm install

@@ -29,8 +29,8 @@ export const siteConfig: SiteConfig = {
   domain: "https://danieldanuwar.com.np",
   // Centralized email address - change here if desired
   email: "contact@danieldanuwar.com.np",
-  // Centralized GitHub link - change here if your handle differs
-  github: "https://github.com/danieldanuwar",
+  // Centralized GitHub link - matches user's verified GitHub account
+  github: "https://github.com/neovicon",
   timezone: "Asia/Kathmandu",
   timezoneLabel: "NPT (UTC+5:45)",
   availability: {
