@@ -5,11 +5,14 @@ export interface Project {
   category: string;
   tagline: string;
   description: string;
+  problem: string;
+  implemented: string[];
+  experimentalScope: string[];
   technologies: string[];
-  highlights: string[];
   githubUrl?: string; // Optional: only if verified repository exists
   liveUrl?: string;   // Optional: only if verified deployment exists
-  status: string;
+  demoNote: string;
+  status: 'Prototype' | 'Research & Prototype' | 'Lab Experiment' | 'Creative Pipeline' | 'Mobile Concept' | 'Active Exploration';
   visualType: 'pharmacy' | 'newslens' | 'voicelab' | 'neovicon' | 'melodix' | 'experiments';
 }
 
@@ -19,18 +22,22 @@ export const projects: Project[] = [
     number: "01",
     title: "PharmacyApp",
     category: "OFFLINE-FIRST SOFTWARE",
-    tagline: "Resilient desktop pharmacy management & inventory system",
-    description: "A desktop pharmacy management system designed to handle medicine inventory, sales, invoices, records, and day-to-day pharmacy workflows without relying on external cloud connectivity.",
-    technologies: ["C#", ".NET", "Avalonia UI", "SQLite"],
-    highlights: [
-      "Desktop-first cross-platform architecture built with Avalonia UI",
-      "Embedded SQLite database for fully offline-capable operations",
-      "Comprehensive inventory tracking with low-stock alerts & expiry flags",
-      "Rapid checkout, invoice generation & thermal receipt printing",
-      "User role authentication, session isolation & structured audit logging",
-      "Automated local snapshot backup & recovery pipeline"
+    status: "Prototype",
+    tagline: "Resilient desktop pharmacy management & inventory prototype",
+    description: "A desktop application concept designed to manage pharmacy medicine inventory, stock thresholds, and rapid checkout without requiring continuous internet connectivity.",
+    problem: "Pharmacies in areas with intermittent internet access cannot afford checkout downtime. Cloud-dependent systems halt operations during network blackouts, risking stock errors and service disruption.",
+    implemented: [
+      "Cross-platform desktop application prototype architected with C# and Avalonia UI",
+      "Embedded SQLite database using Write-Ahead Logging (WAL) for resilient local transactions",
+      "Real-time medicine search, SKU lookup, dosage tracking, and automated low-stock warnings",
+      "Rapid checkout queue and simulated POS dispensing cart with item validation"
     ],
-    status: "DESKTOP PROTOTYPE",
+    experimentalScope: [
+      "Physical ESC/POS thermal receipt printer hardware driver integration",
+      "Local multi-terminal database replication and encrypted backup snapshotting"
+    ],
+    technologies: ["C#", ".NET", "Avalonia UI", "SQLite"],
+    demoNote: "Interactive desktop station simulation running live in the card preview below.",
     visualType: "pharmacy"
   },
   {
@@ -38,18 +45,22 @@ export const projects: Project[] = [
     number: "02",
     title: "NewsLens",
     category: "MEDIA INTELLIGENCE",
-    tagline: "Comparative media framing & perspective analysis engine",
-    description: "An exploration of how different news organizations frame the same event, helping readers compare coverage, identify perspectives, and investigate the context behind headlines.",
-    technologies: ["React", "Python NLP", "Media APIs", "Data Viz"],
-    highlights: [
-      "Multi-source event clustering across diverse editorial desks",
-      "Side-by-side headline & lead paragraph framing comparison",
-      "Objective evidence spectrum separating claims from verified facts",
-      "Linguistic tone & vocabulary emphasis radar breakdown",
-      "Methodology-driven analysis without arbitrary bias labels",
-      "Direct citation drill-down linking to primary reporting"
+    status: "Research & Prototype",
+    tagline: "Comparative media framing & editorial perspective analysis",
+    description: "A research prototype exploring how multiple news organizations report the exact same event with contrasting headlines, vocabulary choices, and editorial angles.",
+    problem: "Readers frequently encounter single-source news stories containing subtle editorial slant, making it difficult to separate objective facts from institutional framing.",
+    implemented: [
+      "Side-by-side headline and lead paragraph comparison interface",
+      "Fact vs. editorial framing spectrum separating verified data from commentary",
+      "Lexical tone radar highlighting vocabulary differences between news desks",
+      "Primary source citation linking to allow readers to verify claims independently"
     ],
-    status: "RESEARCH & PROTOTYPE",
+    experimentalScope: [
+      "Automated multi-publisher RSS ingestion and real-time semantic clustering",
+      "Fine-tuned Python NLP entity extraction pipeline"
+    ],
+    technologies: ["React", "Python NLP", "Media APIs", "Data Visualization"],
+    demoNote: "Interactive comparative framing preview active in the card below.",
     visualType: "newslens"
   },
   {
@@ -57,17 +68,22 @@ export const projects: Project[] = [
     number: "03",
     title: "VoiceLab",
     category: "AI AUDIO EXPERIMENTS",
-    tagline: "Neural voice conversion & audio synthesis research",
-    description: "Experiments in voice conversion, audio processing, and AI-assisted media creation, exploring how machine learning can transform creative workflows.",
-    technologies: ["Python", "PyTorch", "Audio Processing", "Machine Learning"],
-    highlights: [
-      "Deep neural acoustic feature extraction & timbre transfer",
-      "Real-time spectrogram computation & spectral visualization",
-      "Interactive pitch contour & formant modulation workbench",
-      "Clean pipeline for audio cleaning, normalization & segmentation",
-      "Exploration of latent representations in speech synthesis models"
+    status: "Lab Experiment",
+    tagline: "Neural voice conversion & acoustic synthesis research",
+    description: "An experimental workbench investigating how deep neural representations can extract and modulate vocal timbre, pitch contours, and acoustic formants.",
+    problem: "Traditional vocal editing alters pitch by distorting natural timbre, while deep neural audio conversion typically requires complex setups and expensive hardware.",
+    implemented: [
+      "Acoustic feature analysis and timbre transfer experiments using Python and PyTorch",
+      "Interactive neural audio workstation interface with animated real-time waveform visualizer",
+      "Dynamic sliders for pitch modulation, formant shifting, and spectral envelope inspection",
+      "Audio preprocessing, spectrogram generation, and normalization routines"
     ],
-    status: "LAB EXPERIMENT",
+    experimentalScope: [
+      "Real-time low-latency neural vocoder synthesis on consumer-grade hardware",
+      "Multi-speaker zero-shot voice conversion fine-tuning"
+    ],
+    technologies: ["Python", "PyTorch", "Audio Signal Processing", "Machine Learning"],
+    demoNote: "Interactive neural audio workstation interface running live in the card below.",
     visualType: "voicelab"
   },
   {
@@ -75,16 +91,22 @@ export const projects: Project[] = [
     number: "04",
     title: "Neovicon",
     category: "GENERATIVE MEDIA",
+    status: "Creative Pipeline",
     tagline: "AI-assisted visual storytelling & digital character workflow",
-    description: "An experimental creative workflow exploring AI-generated visual storytelling, digital characters, voice, and short-form video.",
-    technologies: ["Generative AI", "Prompt Engineering", "Video Toolchains", "Python"],
-    highlights: [
-      "Visual character consistency pipeline across sequential scenes",
-      "Dynamic storyboard framing & camera movement choreography",
-      "Multi-modal asset orchestration (voice, audio score, imagery)",
-      "Automated timeline assembly & subtitle synchronizer"
+    description: "An exploratory workflow testing how generative image and video models can maintain character consistency across multi-scene narrative sequences.",
+    problem: "Generative video tools frequently suffer from drift—changing character facial structures, clothing, and environment lighting between sequential shots.",
+    implemented: [
+      "Character prompt anchoring pipeline to preserve facial geometry across cuts",
+      "Scene sequencing board with camera vector controls (Pan, Tilt, Dolly)",
+      "Multi-modal prompt parameter workbench with seed and CFG scale management",
+      "Structured storyboard timeline coordinating visual assets and audio cues"
     ],
-    status: "CREATIVE PIPELINE",
+    experimentalScope: [
+      "Automated timeline stitching and synchronous AI voiceover alignment",
+      "End-to-end automated video generation toolchain"
+    ],
+    technologies: ["Generative AI", "Python", "Prompt Engineering", "Video Toolchains"],
+    demoNote: "Interactive storyboard and camera vector studio previewed in the card below.",
     visualType: "neovicon"
   },
   {
@@ -92,16 +114,22 @@ export const projects: Project[] = [
     number: "05",
     title: "Melodix",
     category: "MOBILE APPLICATIONS",
-    tagline: "Distraction-free Android music player concept",
-    description: "A music-focused mobile application concept exploring clean interfaces, listening experiences, and practical Android development.",
-    technologies: ["Kotlin", "Android", "Material 3", "Media3", "Clean Architecture"],
-    highlights: [
-      "Fluid gesture-driven player controls & queue management",
-      "Zero-latency local audio playback with high-fidelity decoders",
-      "Adaptive dark theme harmonizing with album color palettes",
-      "Lightweight memory footprint tuned for battery efficiency"
+    status: "Mobile Concept",
+    tagline: "Distraction-free Android local music player concept",
+    description: "A clean, distraction-free Android music player concept focused on local audio playback, battery efficiency, and tactile interface design.",
+    problem: "Commercial streaming apps are cluttered with social feeds, recommendations, and heavy network tracking when users just want a lightweight player for their offline library.",
+    implemented: [
+      "Modern Android Material 3 player interface concept with rotating vinyl disc animation",
+      "Interactive playback controls, progress scrubber, and upcoming track queue drawer",
+      "Clean architecture UI state modeling applying Kotlin and AndroidX Media3 concepts",
+      "High-contrast dark theme optimized for low battery consumption on OLED displays"
     ],
-    status: "MOBILE CONCEPT",
+    experimentalScope: [
+      "Native Android background playback service and system notification integration",
+      "Custom audio equalizer and FLAC high-res decoding pipeline"
+    ],
+    technologies: ["Kotlin", "Android", "Material 3", "AndroidX Media3"],
+    demoNote: "Interactive Android player mockup active in the card preview below.",
     visualType: "melodix"
   },
   {
@@ -109,16 +137,21 @@ export const projects: Project[] = [
     number: "06",
     title: "Developer Experiments",
     category: "OPEN SOURCE & EXPERIMENTS",
-    tagline: "Algorithmic explorations, UI mechanics & automation scripts",
-    description: "A growing collection of experiments in web development, interface design, automation, and practical software engineering.",
-    technologies: ["TypeScript", "Canvas / WebGL", "Node.js", "Micro-tools"],
-    highlights: [
-      "Interactive physics simulations & particle grid experiments",
-      "Lightweight CLI utilities for daily developer workflows",
-      "Explorations in minimalist design systems & custom shaders",
-      "Hands-on benchmark tests for web runtime performance"
+    status: "Active Exploration",
+    tagline: "Interactive terminal, canvas physics & developer micro-tools",
+    description: "A living sandbox of small-scale tools, canvas rendering tests, performance benchmarks, and browser terminal experiments.",
+    problem: "Testing algorithms and interaction concepts inside large monolithic frameworks is slow and obscures fundamental browser runtime performance.",
+    implemented: [
+      "Functional in-browser terminal emulator with command parser and history buffer",
+      "Executable commands: 'help', 'ls', 'bench' (1M vector iterations), 'manifesto', 'tech', 'clear'",
+      "60fps HTML5 Canvas orbital particle simulation with cursor physics",
+      "Lightweight performance test scripts and DOM benchmark utilities"
     ],
-    status: "ACTIVE EXPLORATION",
+    experimentalScope: [
+      "Expanded CLI developer utilities and standalone npm package publication"
+    ],
+    technologies: ["TypeScript", "HTML5 Canvas", "Node.js", "Web APIs"],
+    demoNote: "Functional terminal emulator running directly inside the card below.",
     visualType: "experiments"
   }
 ];

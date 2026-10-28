@@ -7,12 +7,20 @@ import { NeoviconPreview } from '../components/previews/NeoviconPreview';
 import { MelodixPreview } from '../components/previews/MelodixPreview';
 import { ExperimentsPreview } from '../components/previews/ExperimentsPreview';
 import { GithubIcon } from '../components/icons/GithubIcon';
-import { ArrowUpRight, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, CheckCircle2, Clock, HelpCircle } from 'lucide-react';
 
 export const Projects: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
 
-  const categories = ['ALL', 'OFFLINE-FIRST SOFTWARE', 'MEDIA INTELLIGENCE', 'AI AUDIO EXPERIMENTS', 'GENERATIVE MEDIA', 'MOBILE APPLICATIONS', 'OPEN SOURCE & EXPERIMENTS'];
+  const categories = [
+    'ALL',
+    'OFFLINE-FIRST SOFTWARE',
+    'MEDIA INTELLIGENCE',
+    'AI AUDIO EXPERIMENTS',
+    'GENERATIVE MEDIA',
+    'MOBILE APPLICATIONS',
+    'OPEN SOURCE & EXPERIMENTS'
+  ];
 
   const filteredProjects = activeCategory === 'ALL'
     ? projects
@@ -37,6 +45,23 @@ export const Projects: React.FC = () => {
     }
   };
 
+  const getStatusBadgeClass = (status: Project['status']) => {
+    switch (status) {
+      case 'Prototype':
+      case 'Research & Prototype':
+        return 'status-badge-prototype';
+      case 'Lab Experiment':
+      case 'Active Exploration':
+        return 'status-badge-experiment';
+      case 'Creative Pipeline':
+        return 'status-badge-pipeline';
+      case 'Mobile Concept':
+        return 'status-badge-concept';
+      default:
+        return 'status-badge-default';
+    }
+  };
+
   return (
     <section className="editorial-section projects-section" id="projects" aria-label="Featured Projects">
       <div className="container">
@@ -48,9 +73,9 @@ export const Projects: React.FC = () => {
               <span>{projects.length} PROJECTS CATALOGUED</span>
             </div>
           </div>
-          <h2 className="section-title">Things I've been making.</h2>
+          <h2 className="section-title">Things I've been building.</h2>
           <p className="section-subtitle">
-            Different problems. Different tools. One persistent curiosity.
+            Practical software, neural audio experiments, and interactive prototypes with verified source architectures.
           </p>
         </div>
 
@@ -87,7 +112,9 @@ export const Projects: React.FC = () => {
                   <span className="project-category font-mono">{project.category}</span>
                 </div>
                 <div className="meta-right">
-                  <span className="project-status-tag font-mono">{project.status}</span>
+                  <span className={`project-status-tag font-mono text-xs ${getStatusBadgeClass(project.status)}`}>
+                    {project.status}
+                  </span>
                 </div>
               </div>
 
@@ -95,19 +122,48 @@ export const Projects: React.FC = () => {
               <div className="project-editorial-layout">
                 {/* Details Column */}
                 <div className="project-info-column">
-                  <h3 className="project-heading">{project.title}</h3>
-                  <p className="project-tagline">{project.tagline}</p>
+                  <div className="project-title-area">
+                    <h3 className="project-heading">{project.title}</h3>
+                    <p className="project-tagline">{project.tagline}</p>
+                  </div>
+
                   <p className="project-desc">{project.description}</p>
 
-                  {/* Highlights List */}
+                  {/* Problem & Motivation Box */}
+                  <div className="project-problem-box">
+                    <div className="box-header-row font-mono text-xs text-muted">
+                      <HelpCircle size={12} className="accent-text" />
+                      <span>THE PROBLEM &amp; OBJECTIVE:</span>
+                    </div>
+                    <p className="problem-text">{project.problem}</p>
+                  </div>
+
+                  {/* Implemented Highlights */}
                   <div className="project-highlights-box">
-                    <span className="font-mono text-xs text-muted highlights-label">
-                      ARCHITECTURAL HIGHLIGHTS
-                    </span>
+                    <div className="box-header-row font-mono text-xs text-muted">
+                      <CheckCircle2 size={12} className="accent-text" />
+                      <span>CURRENT IMPLEMENTATION (VERIFIED):</span>
+                    </div>
                     <ul className="highlights-list">
-                      {project.highlights.map((item, idx) => (
+                      {project.implemented.map((item, idx) => (
                         <li key={idx} className="highlight-item">
-                          <CheckCircle2 size={13} className="accent-text highlight-icon" />
+                          <span className="highlight-bullet accent-text">▪</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Experimental Scope Box */}
+                  <div className="project-experimental-box">
+                    <div className="box-header-row font-mono text-xs text-muted">
+                      <Clock size={12} className="text-secondary" />
+                      <span>EXPERIMENTAL SCOPE &amp; NEXT STEPS:</span>
+                    </div>
+                    <ul className="experimental-list">
+                      {project.experimentalScope.map((item, idx) => (
+                        <li key={idx} className="experimental-item text-secondary">
+                          <span className="experimental-bullet text-muted">▫</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -126,7 +182,7 @@ export const Projects: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Links / Action Bar (Only verified destinations) */}
+                  {/* Links / Action Bar */}
                   <div className="project-actions-bar">
                     {project.githubUrl ? (
                       <a
@@ -154,11 +210,10 @@ export const Projects: React.FC = () => {
                       </a>
                     ) : null}
 
-                    {!project.githubUrl && !project.liveUrl && (
-                      <span className="prototype-annotation font-mono text-xs text-muted">
-                        ● Local source &amp; architecture prototype in progress
-                      </span>
-                    )}
+                    <div className="project-demo-indicator font-mono text-xs">
+                      <span className="demo-dot" />
+                      <span className="text-muted">{project.demoNote}</span>
+                    </div>
                   </div>
                 </div>
 

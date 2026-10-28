@@ -11,7 +11,7 @@ export const Contact: React.FC = () => {
       await navigator.clipboard.writeText(siteConfig.email);
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
-    } catch (err) {
+    } catch {
       // Fallback if clipboard API is restricted
       const textArea = document.createElement('textarea');
       textArea.value = siteConfig.email;
@@ -30,9 +30,9 @@ export const Contact: React.FC = () => {
         {/* Section Header */}
         <div className="section-header">
           <span className="section-label">06 // DIRECT DISPATCH</span>
-          <h2 className="section-title">Have something interesting in mind?</h2>
+          <h2 className="section-title">Have a project or opportunity in mind?</h2>
           <p className="section-subtitle">
-            An interesting problem, a collaborative idea, or a conversation about technology? I'd like to hear about it.
+            Whether you have a relevant software development opportunity, a technical problem to solve, or a collaborative project, I'd like to hear about it.
           </p>
         </div>
 

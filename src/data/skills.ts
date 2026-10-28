@@ -4,54 +4,130 @@ export interface SkillGroup {
   skills: {
     name: string;
     description: string;
+    projectEvidence: string;
     highlight?: boolean;
   }[];
 }
 
 export const skillGroups: SkillGroup[] = [
   {
-    category: "Programming",
-    tagline: "Core languages for logic, systems, and experimentation",
+    category: "Languages",
+    tagline: "Core syntax and runtimes for logic, models, and systems",
     skills: [
-      { name: "Python", description: "Scripting, machine learning pipelines, PyTorch models & audio analysis", highlight: true },
-      { name: "JavaScript", description: "Modern ES6+, browser APIs, interactive frontends & asynchronous workflows", highlight: true },
-      { name: "PHP", description: "Server-side logic, classic backend architectures & API development" },
-      { name: "C#", description: "Desktop application architecture, .NET ecosystem & offline-first software", highlight: true }
+      {
+        name: "Python",
+        description: "Scripting, machine learning pipelines, PyTorch tensor workflows & audio signal analysis",
+        projectEvidence: "VoiceLab, Neovicon",
+        highlight: true
+      },
+      {
+        name: "TypeScript & JavaScript",
+        description: "Modern ES6+, browser APIs, strictly typed interfaces & asynchronous frontend state",
+        projectEvidence: "Digital HQ, Developer Experiments, NewsLens",
+        highlight: true
+      },
+      {
+        name: "C#",
+        description: "Desktop application architecture, object-oriented design & .NET runtime ecosystems",
+        projectEvidence: "PharmacyApp",
+        highlight: true
+      },
+      {
+        name: "Kotlin",
+        description: "Android application fundamentals, Material 3 UI layouts & media component concepts",
+        projectEvidence: "Melodix"
+      },
+      {
+        name: "HTML5 & CSS3",
+        description: "Accessible semantic structure, fluid typography, CSS custom properties & responsive grid design",
+        projectEvidence: "Digital HQ, Web Tooling"
+      }
     ]
   },
   {
-    category: "Web Development",
-    tagline: "Building responsive, modern, and high-performance digital interfaces",
+    category: "Frameworks & Libraries",
+    tagline: "Component architectures and UI toolkits for web & desktop",
     skills: [
-      { name: "React", description: "Component-driven architecture, custom hooks, and state management", highlight: true },
-      { name: "JSX", description: "Expressive declarative UI composition with type safety" },
-      { name: "HTML & Semantic Markup", description: "Accessible structure, SEO integrity & valid document hierarchies" },
-      { name: "CSS Architecture", description: "Modern layouts, Flexbox/Grid, CSS custom properties & fluid typography", highlight: true },
-      { name: "Node.js Fundamentals", description: "Runtime mechanics, file systems, streams & lightweight server endpoints" },
-      { name: "MERN Stack Exploration", description: "Investigating full-stack patterns across Mongo, Express, React, and Node" }
+      {
+        name: "React",
+        description: "Declarative component composition, custom state hooks, and modular UI engineering",
+        projectEvidence: "Digital HQ, NewsLens",
+        highlight: true
+      },
+      {
+        name: "Avalonia UI",
+        description: "Cross-platform XAML-based desktop user interface framework for the .NET ecosystem",
+        projectEvidence: "PharmacyApp",
+        highlight: true
+      },
+      {
+        name: "Node.js",
+        description: "Runtime mechanics, micro-tool automation scripts, and local developer CLI workflows",
+        projectEvidence: "Developer Experiments"
+      }
     ]
   },
   {
-    category: "AI & Machine Learning",
-    tagline: "Practical exploration of neural models, audio, and generative pipelines",
+    category: "Databases & Storage",
+    tagline: "Local-first data persistence and transaction integrity",
     skills: [
-      { name: "PyTorch", description: "Tensor operations, neural net architectures & voice conversion experiments", highlight: true },
-      { name: "AI-Assisted Development", description: "Leveraging LLMs and agentic workflows to accelerate problem solving", highlight: true },
-      { name: "Audio Processing", description: "Waveform analysis, FFT spectrograms & audio feature extraction" },
-      { name: "Generative AI Workflows", description: "Multi-modal prompts, image synthesis, and automated storyboarding" },
-      { name: "Machine Learning Experimentation", description: "Hands-on model evaluation, training loops & parameter tuning" }
+      {
+        name: "SQLite",
+        description: "Embedded zero-configuration relational database with WAL (Write-Ahead Logging) mode for offline resilience",
+        projectEvidence: "PharmacyApp",
+        highlight: true
+      }
     ]
   },
   {
-    category: "Development Tools",
-    tagline: "The workbench enabling reproducibility, resilience, and clean delivery",
+    category: "Developer Tools",
+    tagline: "Environment, version control, and delivery pipelines",
     skills: [
-      { name: "Git", description: "Version control, branching strategies, conflict resolution & history hygiene", highlight: true },
-      { name: "GitHub", description: "Repository hosting, GitHub Actions CI/CD workflows & open-source collaboration" },
-      { name: "Linux", description: "Command-line environment, shell scripting, process handling & system utilities", highlight: true },
-      { name: "SQLite", description: "Lightweight, zero-configuration embedded database for offline software" },
-      { name: ".NET", description: "Modern cross-platform development ecosystem for desktop & tooling" },
-      { name: "VS Code & AI Tools", description: "Streamlined editor configuration, debugging & AI-augmented coding" }
+      {
+        name: "Git & GitHub",
+        description: "Version hygiene, branch management, issue tracking, and GitHub Actions CI/CD automation",
+        projectEvidence: "GitHub Pages CI/CD Pipeline",
+        highlight: true
+      },
+      {
+        name: "Linux & Bash",
+        description: "POSIX shell commands, system utilities, process inspection, and local dev environments",
+        projectEvidence: "Local development & terminal tooling",
+        highlight: true
+      },
+      {
+        name: "Vite",
+        description: "Modern frontend tooling, rapid hot module reloading, and optimized ESM production bundling",
+        projectEvidence: "Digital HQ Build Pipeline"
+      },
+      {
+        name: "VS Code & AI Tools",
+        description: "Configured developer environment, debugging, terminal integration, and AI-augmented coding workflows",
+        projectEvidence: "Daily workflow"
+      }
+    ]
+  },
+  {
+    category: "AI & Audio Experimentation",
+    tagline: "Neural models, acoustic vectors, and generative media workflows",
+    skills: [
+      {
+        name: "PyTorch",
+        description: "Neural network evaluation, tensor computations, and experimental voice conversion pipelines",
+        projectEvidence: "VoiceLab",
+        highlight: true
+      },
+      {
+        name: "Audio Signal Processing",
+        description: "Spectrogram computation, FFT analysis, pitch contour extraction, and formant modulation",
+        projectEvidence: "VoiceLab",
+        highlight: true
+      },
+      {
+        name: "Generative Media Tooling",
+        description: "Prompt sequencing, character consistency anchoring, and multi-scene storyboard orchestration",
+        projectEvidence: "Neovicon"
+      }
     ]
   }
 ];

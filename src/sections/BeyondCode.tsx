@@ -26,7 +26,7 @@ export const BeyondCode: React.FC = () => {
         {/* Section Header */}
         <div className="section-header">
           <span className="section-label">04 // BEYOND THE CODE</span>
-          <h2 className="section-title">An engineer's curiosity doesn't stop at code.</h2>
+          <h2 className="section-title">Curiosity doesn't stop at code.</h2>
           <p className="section-subtitle">
             The intellectual pursuits, mental models, and creative instincts that influence how I approach software, systems, and problem-solving.
           </p>

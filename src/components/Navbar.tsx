@@ -35,7 +35,7 @@ export const Navbar: React.FC = () => {
           hour12: false
         });
         setCurrentTime(formatter.format(now));
-      } catch (err) {
+      } catch {
         const d = new Date();
         setCurrentTime(d.toTimeString().substring(0, 8));
       }

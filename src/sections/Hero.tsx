@@ -1,6 +1,7 @@
 import React from 'react';
 import { siteConfig } from '../data/siteConfig';
 import { HeroCanvas } from '../components/HeroCanvas';
+import { GithubIcon } from '../components/icons/GithubIcon';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -26,7 +27,7 @@ export const Hero: React.FC = () => {
             <div className="hero-label-badge font-mono">
               <span className="accent-text">SYS.INDEX</span>
               <span className="sep">/</span>
-              <span>INDEPENDENT DEVELOPER · CREATIVE TECHNOLOGIST</span>
+              <span>DEVELOPER · CREATIVE TECHNOLOGIST</span>
             </div>
 
             <div className="status-pill hero-status-indicator" title="Current availability state">
@@ -44,14 +45,14 @@ export const Hero: React.FC = () => {
 
           {/* Supporting Copy */}
           <p className="hero-lead">
-            I'm Daniel. I build software, experiment with AI, and explore the ideas shaping our digital world.
+            I'm a developer from Nepal interested in building practical software, exploring AI, and turning technical ideas into useful tools.
           </p>
 
           <p className="hero-statement-sub">
-            {siteConfig.brandStatement}
+            Learning by building: from offline-first desktop systems to machine learning experiments and responsive web applications.
           </p>
 
-          {/* Two Prominent Call-to-Actions */}
+          {/* Prominent Call-to-Actions */}
           <div className="hero-actions">
             <a
               href="#projects"
@@ -72,6 +73,19 @@ export const Hero: React.FC = () => {
               <span>Get in touch</span>
               <ArrowUpRight size={15} />
             </a>
+
+            <a
+              href={siteConfig.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost hero-github-btn font-mono"
+              id="hero-github-btn"
+              aria-label="Visit Daniel's GitHub profile"
+            >
+              <GithubIcon size={14} />
+              <span>GitHub</span>
+              <ArrowUpRight size={12} />
+            </a>
           </div>
 
           {/* Technical Metadata Strip */}
@@ -82,11 +96,11 @@ export const Hero: React.FC = () => {
             </div>
             <div className="meta-item">
               <span className="meta-k">FOCUS:</span>
-              <span className="meta-v">AI · OFFLINE SYSTEMS · WEB</span>
+              <span className="meta-v">PRACTICAL SOFTWARE · AI · WEB</span>
             </div>
             <div className="meta-item">
               <span className="meta-k">APPROACH:</span>
-              <span className="meta-v accent-text">FIRST PRINCIPLES</span>
+              <span className="meta-v accent-text">LEARNING BY BUILDING</span>
             </div>
           </div>
         </div>

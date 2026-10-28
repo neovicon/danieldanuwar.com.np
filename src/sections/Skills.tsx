@@ -1,18 +1,20 @@
 import React from 'react';
 import { skillGroups } from '../data/skills';
-import { Wrench, Terminal, Cpu, Globe, Sparkles } from 'lucide-react';
+import { Wrench, Terminal, Cpu, Database, Layers, Sparkles } from 'lucide-react';
 
 export const Skills: React.FC = () => {
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'Programming':
+      case 'Languages':
         return <Terminal size={14} className="accent-text" />;
-      case 'Web Development':
-        return <Globe size={14} className="accent-text" />;
-      case 'AI & Machine Learning':
-        return <Cpu size={14} className="accent-text" />;
-      case 'Development Tools':
+      case 'Frameworks & Libraries':
+        return <Layers size={14} className="accent-text" />;
+      case 'Databases & Storage':
+        return <Database size={14} className="accent-text" />;
+      case 'Developer Tools':
         return <Wrench size={14} className="accent-text" />;
+      case 'AI & Audio Experimentation':
+        return <Cpu size={14} className="accent-text" />;
       default:
         return <Sparkles size={14} className="accent-text" />;
     }
@@ -24,9 +26,9 @@ export const Skills: React.FC = () => {
         {/* Section Header */}
         <div className="section-header">
           <span className="section-label">03 // TECHNICAL STACK</span>
-          <h2 className="section-title">Tools are a means, not an identity.</h2>
+          <h2 className="section-title">Tools chosen for the problem.</h2>
           <p className="section-subtitle">
-            Technologies evaluated through hands-on architecture, local deployments, and practical system requirements rather than superficial novelty.
+            Technologies evaluated through hands-on architecture, local deployments, and practical project constraints rather than checklist items.
           </p>
         </div>
 
@@ -61,6 +63,10 @@ export const Skills: React.FC = () => {
                       )}
                     </div>
                     <p className="skill-desc">{skill.description}</p>
+                    <div className="skill-evidence font-mono text-xs">
+                      <span className="evidence-label text-muted">Observed in:</span>{' '}
+                      <span className="evidence-val accent-text">{skill.projectEvidence}</span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -72,7 +78,7 @@ export const Skills: React.FC = () => {
         <div className="skills-editorial-footer font-mono text-xs">
           <span className="accent-text">NOTE ON PROFICIENCY:</span>
           <span className="text-muted">
-            Displayed technologies reflect active codebases and reproducible projects. Tools are chosen based on problem constraints rather than dogmatic stack preferences.
+            All listed skills correspond to active projects and verified source implementations. No arbitrary percentages or unverified claims.
           </span>
         </div>
       </div>
