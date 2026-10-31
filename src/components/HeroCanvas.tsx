@@ -68,23 +68,23 @@ export const HeroCanvas: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
     canvas.addEventListener('mouseleave', handleMouseLeave);
 
-    // Initialize orbital nodes
+    // Initialize orbital nodes with responsive ring ratios
     const particleCount = 38;
     const particles: Particle[] = [];
-    const rings = [60, 110, 165, 220, 275];
+    const ringFactors = [0.22, 0.42, 0.62, 0.82, 1.0];
 
     for (let i = 0; i < particleCount; i++) {
-      const ring = rings[i % rings.length];
+      const ringFactor = ringFactors[i % ringFactors.length];
       const angle = (Math.PI * 2 * i) / particleCount + (Math.random() * 0.4);
       const isAccent = i % 5 === 0;
       particles.push({
-        x: width * 0.5 + Math.cos(angle) * ring,
-        y: height * 0.5 + Math.sin(angle) * ring,
+        x: width * 0.5,
+        y: height * 0.5,
         vx: 0,
         vy: 0,
         baseRadius: isAccent ? 2.5 : 1.5,
         radius: isAccent ? 2.5 : 1.5,
-        ring,
+        ring: ringFactor,
         angle,
         speed: (0.002 + Math.random() * 0.003) * (i % 2 === 0 ? 1 : -1),
         isAccent,
@@ -103,13 +103,15 @@ export const HeroCanvas: React.FC = () => {
 
       const centerX = width * 0.5 + (mouse.x - width * 0.5) * 0.12;
       const centerY = height * 0.5 + (mouse.y - height * 0.5) * 0.12;
+      const maxOrbitalRadius = Math.min(width, height) * 0.43;
 
       if (!prefersReducedMotion) {
         globalRotation += 0.001;
       }
 
-      // Draw subtle orbital rings
-      rings.forEach((r, idx) => {
+      // Draw subtle orbital rings scaled to container
+      ringFactors.forEach((factor, idx) => {
+        const r = factor * maxOrbitalRadius;
         ctx.beginPath();
         ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
         ctx.strokeStyle = idx === 1 ? 'rgba(199, 255, 101, 0.08)' : 'rgba(255, 255, 255, 0.035)';
@@ -131,8 +133,9 @@ export const HeroCanvas: React.FC = () => {
           p.angle += p.speed;
         }
 
-        const targetX = centerX + Math.cos(p.angle + globalRotation) * p.ring;
-        const targetY = centerY + Math.sin(p.angle + globalRotation) * (p.ring * 0.92);
+        const particleRingRadius = p.ring * maxOrbitalRadius;
+        const targetX = centerX + Math.cos(p.angle + globalRotation) * particleRingRadius;
+        const targetY = centerY + Math.sin(p.angle + globalRotation) * (particleRingRadius * 0.92);
 
         p.x += (targetX - p.x) * 0.15;
         p.y += (targetY - p.y) * 0.15;
@@ -161,8 +164,9 @@ export const HeroCanvas: React.FC = () => {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 72) {
-            const alpha = (1 - dist / 72) * 0.15;
+          const maxDist = Math.min(width, height) * 0.14;
+          if (dist < maxDist) {
+            const alpha = (1 - dist / maxDist) * 0.15;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -175,11 +179,18 @@ export const HeroCanvas: React.FC = () => {
         }
       }
 
-      // Exterior decorative coordinate markers
-      ctx.font = '10px "JetBrains Mono", monospace';
-      ctx.fillStyle = 'rgba(153, 157, 167, 0.4)';
-      ctx.fillText(`SYS.ORBIT // ${particles.length} NODES`, 20, height - 20);
-      ctx.fillText(`RNG: 5 // ACC: #C7FF65`, width - 150, height - 20);
+      // Exterior decorative coordinate markers responsive to width
+      if (width >= 340) {
+        ctx.font = '10px "JetBrains Mono", monospace';
+        ctx.fillStyle = 'rgba(153, 157, 167, 0.4)';
+        ctx.fillText(`SYS.ORBIT // ${particles.length} NODES`, 16, height - 16);
+        ctx.fillText(`RNG: 5 // ACC: #C7FF65`, width - 138, height - 16);
+      } else if (width >= 240) {
+        ctx.font = '9px "JetBrains Mono", monospace';
+        ctx.fillStyle = 'rgba(153, 157, 167, 0.4)';
+        ctx.fillText(`SYS.ORBIT`, 12, height - 12);
+        ctx.fillText(`ACC: #C7FF65`, width - 80, height - 12);
+      }
 
       if (!prefersReducedMotion) {
         animationFrameId = requestAnimationFrame(render);

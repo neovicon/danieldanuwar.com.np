@@ -71,11 +71,39 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Body scroll lock & key listeners for mobile drawer
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('mobile-nav-locked');
+    } else {
+      document.body.classList.remove('mobile-nav-locked');
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth > 820) setMobileMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      document.body.classList.remove('mobile-nav-locked');
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [mobileMenuOpen]);
+
   const handleLinkClick = (href: string) => {
     setMobileMenuOpen(false);
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
     }
   };
 
@@ -151,7 +179,13 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Drawer Menu */}
-      <div className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`} aria-hidden={!mobileMenuOpen}>
+      <div
+        className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}
+        aria-hidden={!mobileMenuOpen}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setMobileMenuOpen(false);
+        }}
+      >
         <div className="mobile-drawer-inner">
           <div className="mobile-drawer-header">
             <span className="font-mono text-xs text-muted">NAVIGATION INDEX</span>

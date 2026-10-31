@@ -5,6 +5,16 @@ import { Target, Compass, Eye, Sparkles, Quote, ArrowRight } from 'lucide-react'
 export const BeyondCode: React.FC = () => {
   const [activeInterest, setActiveInterest] = useState<Interest>(interests[0]);
 
+  const handleSelectInterest = (item: Interest) => {
+    setActiveInterest(item);
+    if (typeof window !== 'undefined' && window.innerWidth <= 1080) {
+      const panel = document.getElementById('beyond-reflection-panel');
+      if (panel) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  };
+
   const getInterestIcon = (id: string) => {
     switch (id) {
       case 'chess':
@@ -39,13 +49,13 @@ export const BeyondCode: React.FC = () => {
             {interests.map((item, idx) => (
               <div
                 key={item.id}
-                onClick={() => setActiveInterest(item)}
+                onClick={() => handleSelectInterest(item)}
                 className={`beyond-card ${activeInterest.id === item.id ? 'active' : ''}`}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
-                    setActiveInterest(item);
+                    handleSelectInterest(item);
                   }
                 }}
               >
@@ -77,7 +87,7 @@ export const BeyondCode: React.FC = () => {
           </div>
 
           {/* Right Reflection / Visual Inspector */}
-          <div className="beyond-reflection-panel">
+          <div className="beyond-reflection-panel" id="beyond-reflection-panel">
             <div className="reflection-inner">
               <div className="reflection-badge font-mono text-xs">
                 <Quote size={12} className="accent-text" />
